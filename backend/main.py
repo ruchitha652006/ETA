@@ -33,12 +33,8 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup_event():
-    """Initialize and seed database on first run."""
+    """Initialize database on startup."""
     init_db()
-    try:
-        seed_database()
-    except Exception as e:
-        print(f"Seed skipped (may already exist): {e}")
 
 
 # ─── Health ────────────────────────────────────────────────────────────────────
@@ -194,3 +190,5 @@ def delay_history(train_no: str, db: Session = Depends(get_db)):
     """Get historical delay data for analytics and trend charts."""
     history = get_delay_history(db, train_no)
     return history
+
+

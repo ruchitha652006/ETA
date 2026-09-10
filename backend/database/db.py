@@ -1,7 +1,16 @@
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, ForeignKey, Boolean, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
+from dotenv import load_dotenv
 import os
+
+# Load the project-root .env.local file when running locally
+load_dotenv(
+    os.path.join(
+        os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
+        ".env.local",
+    )
+)
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./raileta.db")
 
